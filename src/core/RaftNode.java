@@ -43,12 +43,12 @@ public class RaftNode {
             public void run() {
                 startElection();
             }
-        }, 5000 + random.nextInt(5000)); // 1500 to 3000 milliseconds
+        }, 2500 + random.nextInt(2500)); // 1500 to 3000 milliseconds
     }
 
     public synchronized void startElection() {
-        System.out.println("node "+nodeId +" starts to elect a leader");
         state.setCurrentTerm(state.getCurrentTerm() + 1);
+        System.out.println("node "+nodeId +" term "+state.getCurrentTerm()+" starts to elect a leader");
         state.setVotedFor(nodeId);
         role = ServerState.CANDIDATE;
         voteCount.set(1);  // 为自己投票
@@ -74,6 +74,7 @@ public class RaftNode {
 
     //接收投票请求，发送决议票到候选人
     public synchronized void receiveVoteRequest(RaftRequest request) {
+        System.out.println("node "+nodeId+" term "+state.getCurrentTerm()+" gets vote request from candidate node " + request.getCandidateId());
         boolean voteGranted = false;
         int currentTerm = state.getCurrentTerm();
         int lastLogIndex = state.getLastLogIndex();
@@ -82,16 +83,25 @@ public class RaftNode {
         if (request.getTerm() < currentTerm) {
             voteGranted = false; // 如果请求的任期小于当前任期，拒绝投票
         } else {
-            if (request.getTerm() > currentTerm || state.getVotedFor() == -1) {
-                state.setCurrentTerm(request.getTerm()); // 更新当前任期
-                state.setVotedFor(-1);  // 重置已投票的候选人ID
-
-                if (request.getLastLogTerm() > lastLogTerm ||
-                        (request.getLastLogTerm() == lastLogTerm && request.getLastLogIndex() >= lastLogIndex)) {
-                    state.setVotedFor(request.getCandidateId()); // 投票给候选人
-                    voteGranted = true; // 发送赞成票
-                }
+            if (request.getTerm() > currentTerm){
+                state.setCurrentTerm(request.getTerm());
+                state.setVotedFor(-1);
             }
+            if (state.getVotedFor() == -1){
+                state.setVotedFor(request.getCandidateId());
+                voteGranted = true;
+                resetElectionTimer();
+            }
+//            if (request.getTerm() > currentTerm || state.getVotedFor() == -1) {
+//                state.setCurrentTerm(request.getTerm()); // 更新当前任期
+//                state.setVotedFor(-1);  // 重置已投票的候选人ID
+//
+//                if (request.getLastLogTerm() > lastLogTerm ||
+//                        (request.getLastLogTerm() == lastLogTerm && request.getLastLogIndex() >= lastLogIndex)) {
+//                    state.setVotedFor(request.getCandidateId()); // 投票给候选人
+//                    voteGranted = true; // 发送赞成票
+//                }
+//            }
         }
 
         // 使用 RaftClient 发送投票结果
@@ -106,17 +116,20 @@ public class RaftNode {
                 voteGranted
         );
         int id = request.getCandidateId();
-        System.out.println(nodeId+" send a " + voteGranted + " to " + id);
+        System.out.println("node "+nodeId+" term "+state.getCurrentTerm()+" decides to send a " + voteGranted + " to " + id);
         raftClient.sendRequest(peers.get(id-1),port.get(id-1),voteResponse);
     }
 
     //接收决议票
-    public synchronized void receiveVoteResponse(boolean voteGranted) {
+    public synchronized void receiveVoteResponse(RaftRequest request) {
+        boolean voteGranted = request.getVote();
+        System.out.println("candidate "+nodeId+" term "+state.getCurrentTerm()+" receives "+voteGranted+" vote from candidate node "+request.getCandidateId());
         if (voteGranted) {
             int votes = voteCount.incrementAndGet();
-            if (votes > (peers.size() / 2) + 1) {
+//            System.out.println("node "+nodeId+" vote number: " + votes);
+            if (votes >= (peers.size() / 2) + 1) {
                 role = ServerState.LEADER;
-                System.out.println("node "+nodeId+" became leader for term " + state.getCurrentTerm());
+                System.out.println("node "+nodeId+" term "+state.getCurrentTerm()+" became leader for term " + state.getCurrentTerm());
                 voteCount.set(0);
                 // 开始领导者的行为，如定期发送心跳
                 if (electionTimer != null) {
