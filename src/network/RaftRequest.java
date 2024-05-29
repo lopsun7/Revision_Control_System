@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class RaftRequest implements Serializable {
-    private RaftRequestType requestType; // REQUEST_VOTE / APPEND_ENTRIES
+    private RaftRequestType requestType; // REQUEST_VOTE / APPEND_ENTRIES / HEARTBEAT
     private int term; // 任期号
     private int candidateId; // 候选人ID
     private int lastLogIndex; // 最后日志索引
@@ -14,7 +14,9 @@ public class RaftRequest implements Serializable {
     private List<LogEntry> entries; // 日志条目
     private int leaderCommit; // 领导者已提交的日志索引
 
-    public RaftRequest(RaftRequestType requestType, int term, int candidateId, int lastLogIndex, int lastLogTerm, List<LogEntry> entries, int leaderCommit) {
+    private boolean vote; //投票结果
+
+    public RaftRequest(RaftRequestType requestType, int term, int candidateId, int lastLogIndex, int lastLogTerm, List<LogEntry> entries, int leaderCommit, boolean vote) {
         this.requestType = requestType;
         this.term = term;
         this.candidateId = candidateId;
@@ -22,9 +24,19 @@ public class RaftRequest implements Serializable {
         this.lastLogTerm = lastLogTerm;
         this.entries = entries;
         this.leaderCommit = leaderCommit;
+        this.vote =vote;
     }
 
     // Getters and Setters
+
+
+    public boolean getVote() {
+        return vote;
+    }
+
+    public void setVote(boolean vote) {
+        this.vote = vote;
+    }
 
     public RaftRequestType getRequestType() {
         return requestType;

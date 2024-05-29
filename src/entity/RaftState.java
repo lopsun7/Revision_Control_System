@@ -11,6 +11,7 @@ public class RaftState {
 
     public RaftState() {
         this.log = new ArrayList<>();
+        this.votedFor = -1;
         this.commitIndex = 0;  // 初始化为0
     }
 
