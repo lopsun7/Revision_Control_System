@@ -1,27 +1,18 @@
-import core.RaftNode;
-import entity.RaftState;
-import network.RaftServer;
-import util.Config;
+import main.java.core.RaftNode;
+import main.java.network.RaftServer;
+import main.java.util.Config;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-import core.RaftNode;
-import entity.RaftState;
-import network.RaftServer;
-import util.Config;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Config config = new Config("src/util/config.properties");
+        Config config = new Config("src/main/resources/config.properties");
         List<String> peers = config.getPeers();
         List<Integer> ports = config.getPorts();
 

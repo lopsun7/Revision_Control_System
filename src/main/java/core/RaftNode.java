@@ -1,10 +1,10 @@
-package core;
+package main.java.core;
 
-import entity.LogEntry;
-import entity.RaftState;
-import network.RaftClient;
-import network.RaftRequest;
-import network.RaftRequestType;
+import main.java.entity.LogEntry;
+import main.java.entity.RaftState;
+import main.java.network.RaftClient;
+import main.java.network.RaftRequest;
+import main.java.network.RaftRequestType;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;

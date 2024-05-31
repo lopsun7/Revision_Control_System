@@ -1,6 +1,6 @@
-package network;
+package main.java.network;
 
-import core.RaftNode;
+import main.java.core.RaftNode;
 
 import java.io.*;
 import java.net.ServerSocket;

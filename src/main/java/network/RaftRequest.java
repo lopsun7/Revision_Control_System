@@ -1,6 +1,6 @@
-package network;
+package main.java.network;
 
-import entity.LogEntry;
+import main.java.entity.LogEntry;
 
 import java.io.Serializable;
 import java.util.List;

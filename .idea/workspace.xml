@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a9db3bc-7ff4-4448-b2c6-d23736dc141d" name="Changes" comment="`0.3 - 1.socket communication within nodes 2.raft server &amp; raft client 3. heartbeat verified`&#10;&#10;futrue plan:&#10;&#10;0.35 - multiple candidates issues&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database">
+    <list default="true" id="5a9db3bc-7ff4-4448-b2c6-d23736dc141d" name="Changes" comment="`0.36 - Java 8`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/RaftNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/RaftNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/RaftServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/RaftServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/RaftNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/RaftNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/ServerState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/ServerState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/LogEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/LogEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/RaftState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/RaftState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/RaftClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/RaftRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/RaftRequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftRequestType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/RaftServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,12 +36,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "lopsun7"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;lopsun7&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -53,10 +65,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
-    "Application.test.executor": "Debug",
+    "Application.test.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -64,12 +79,20 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/lopsun/Documents/317/project/Revision-Control-System/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="test" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="test.Main" />
       <module name="Revision-Control-System" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -91,7 +114,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716855541022</updated>
-      <workItem from="1716855542060" duration="28287000" />
+      <workItem from="1716855542060" duration="29460000" />
+      <workItem from="1717104895111" duration="3894000" />
     </task>
     <task id="LOCAL-00001" summary="initialization 0.1">
       <option name="closed" value="true" />
@@ -117,7 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717020885331</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database">
+      <option name="closed" value="true" />
+      <created>1717026311082</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1717026311082</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,17 +159,7 @@
     <MESSAGE value="initialization 0.1" />
     <MESSAGE value="`0.2 - 1.leader election added(to be verified) 2.heartbeat mechanism(to be verified)`&#10;&#10;futrue plan:&#10;&#10;0.3 - 1.rpc communication within nodes 2.leader election &amp; heartbeat mechanism verification&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - Data persistence&#10;&#10;0.7 - deployment" />
     <MESSAGE value="`0.3 - 1.socket communication within nodes 2.raft server &amp; raft client 3. heartbeat verified`&#10;&#10;futrue plan:&#10;&#10;0.35 - multiple candidates issues&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
-    <option name="LAST_COMMIT_MESSAGE" value="`0.3 - 1.socket communication within nodes 2.raft server &amp; raft client 3. heartbeat verified`&#10;&#10;futrue plan:&#10;&#10;0.35 - multiple candidates issues&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/core/RaftNode.java</url>
-          <line>124</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
+    <option name="LAST_COMMIT_MESSAGE" value="`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
   </component>
 </project>

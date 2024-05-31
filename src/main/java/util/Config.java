@@ -1,12 +1,9 @@
-package util;
+package main.java.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
