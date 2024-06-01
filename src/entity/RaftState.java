@@ -19,14 +19,14 @@ public class RaftState {
         if (log.isEmpty()) {
             return 0;  // 返回0或其他适当的默认值
         }
-        return log.getLast().getIndex();
+        return log.size() -1;
     }
 
     public int getLastLogTerm() {
         if (log.isEmpty()) {
             return 0;  // 返回0或其他适当的默认值
         }
-        return log.getLast().getTerm();
+        return log.get(log.size() - 1).getTerm();
     }
 
     // getters and setters

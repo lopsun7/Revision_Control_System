@@ -21,9 +21,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Config config = new Config("src/util/config.properties");
-        List<String> peers = config.getPeers();
-        List<Integer> ports = config.getPorts();
+        //Config config = new Config("src/util/config.properties");
+        List<String> peers = Arrays.asList("0.0.0.0", "0.0.0.0", "0.0.0.0", "0.0.0.0","0.0.0.0");//config.getPeers();
+        List<Integer> ports = Arrays.asList(8000,8001,8002,8003,8004);// config.getPorts();
 
         // 用于存储所有服务器线程的列表
         List<Thread> serverThreads = new ArrayList<>();
