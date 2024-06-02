@@ -17,6 +17,7 @@ public class RaftNode {
     private Random random;
     private int nodeId; // 节点的唯一标识
     private AtomicInteger voteCount; // 用于计票的原子整数
+    private AtomicInteger successCount; // 用于日志复制的原子整数
     private List<String> peers; // 其他节点的地址列表
     private List<Integer> port; // 其他节点的地址列表
     private RaftClient raftClient; // 网络通信客户端
@@ -27,6 +28,7 @@ public class RaftNode {
         this.random = new Random();
         this.nodeId = nodeId;
         this.voteCount = new AtomicInteger(0);
+        this.successCount = new AtomicInteger(0);
         this.raftClient = new RaftClient();
         this.peers = peers;
         this.port = port;
@@ -73,7 +75,7 @@ public class RaftNode {
     }
 
     //接收投票请求，发送决议票到候选人
-    public synchronized void receiveVoteRequest(RaftRequest request) {
+    public void receiveVoteRequest(RaftRequest request) {
         System.out.println("node "+nodeId+" term "+state.getCurrentTerm()+" gets vote request from candidate node " + request.getCandidateId());
         boolean voteGranted = false;
         int currentTerm = state.getCurrentTerm();
@@ -121,9 +123,9 @@ public class RaftNode {
     }
 
     //接收决议票
-    public synchronized void receiveVoteResponse(RaftRequest request) {
+    public void receiveVoteResponse(RaftRequest request) {
         boolean voteGranted = request.getVote();
-        System.out.println("candidate "+nodeId+" term "+state.getCurrentTerm()+" receives "+voteGranted+" vote from candidate node "+request.getCandidateId());
+        System.out.println("candidate "+nodeId+" term "+state.getCurrentTerm()+" receives "+voteGranted+" vote from follower node "+request.getCandidateId());
         if (voteGranted) {
             int votes = voteCount.incrementAndGet();
 //            System.out.println("node "+nodeId+" vote number: " + votes);
@@ -150,6 +152,7 @@ public class RaftNode {
 
     //发送心跳
     public void sendHeartbeats() {
+        successCount.set(0);
         if (role == ServerState.LEADER) {
             for (int i = 0;i < peers.size(); i++) {
                 RaftRequest heartbeat = new RaftRequest(
@@ -158,7 +161,7 @@ public class RaftNode {
                         nodeId,
                         state.getLastLogIndex(),
                         state.getLastLogTerm(),
-                        new ArrayList<>(), // 空日志条目列表代表心跳
+                        null,
                         state.getCommitIndex(),
                         false
                 );
@@ -170,41 +173,90 @@ public class RaftNode {
     //接收心跳
     public synchronized void receiveHeartbeats(RaftRequest request){
         System.out.println(nodeId+" receives a heartbeat from " + request.getCandidateId());
-        if (request.getTerm() > state.getCurrentTerm()){
-            state.setCurrentTerm(request.getTerm());
-            role = ServerState.FOLLOWER;
-        }
+        //leader的term小于follwer，拒绝
+        if (request.getTerm() < state.getCurrentTerm()) return;
+
+        //leader的term大于follwer，更新follwer的term和role,重置选举计时
+        state.setCurrentTerm(request.getTerm());
+        role = ServerState.FOLLOWER;
         resetElectionTimer();
-        //判断日志是否一致
-        boolean isSame = true;
-        int id = request.getCandidateId();
+        if(request.getEntries() == null) return;
+
+        //判断日志复制是否成功
+        boolean isSuccess;
+        int leaderLastLogIndex = request.getLastLogIndex();
+        int leaderLastLogTerm = request.getLastLogTerm();
+
+        //判断末条日志是否相同
+        if(leaderLastLogIndex == state.getLastLogIndex() && leaderLastLogTerm == state.getTermFromIndex(leaderLastLogIndex)){
+            isSuccess = true;
+            state.addAll(request.getEntries());
+            //提交进度比leader慢
+            if (state.getCommitIndex() < request.getLeaderCommit()){
+                //apply to state machine
+            }
+        }
+        else{
+            isSuccess = false;
+        }
+
+        int leaderId = request.getCandidateId();
         RaftRequest heartbeatResponse = new RaftRequest(
                 RaftRequestType.ANSWER_HEARTBEAT,
                 state.getCurrentTerm(),
                 nodeId,
                 state.getLastLogIndex(),
                 state.getLastLogTerm(),
-                state.getLog(),
+                null,
                 state.getCommitIndex(),
-                isSame
+                isSuccess
         );
-        raftClient.sendRequest(peers.get(id-1),port.get(id-1),heartbeatResponse);
+        raftClient.sendRequest(peers.get(leaderId-1),port.get(leaderId-1),heartbeatResponse);
 
     }
 
     //接收心跳结果
     public void receiveHeartbeatsResult(RaftRequest request){
-    }
-    public void appendEntries(List<LogEntry> entries) {
-        // 实现日志条目追加逻辑
-        if (entries.isEmpty()) {
-            // 处理心跳
-            System.out.println("Received heartbeat from leader");
-            resetElectionTimer();
-        } else {
-            // 处理追加日志条目
-            // 这里需要实现日志追加的逻辑
-            System.out.println("Received log entries to append");
+        boolean isSuccess = request.getVote();
+        System.out.println("leader "+nodeId+" term "+state.getCurrentTerm()+" receives success from follower node "+request.getCandidateId());
+        if (isSuccess) {
+            int sc = successCount.incrementAndGet();
+            if (sc >= (peers.size() / 2) + 1) {
+                successCount.set(0);
+                //apply to state machine
+            }
+        }
+        else {
+            int followerId = request.getCandidateId();
+            RaftRequest heartbeat = new RaftRequest(
+                    RaftRequestType.SYNC,
+                    state.getCurrentTerm(),
+                    nodeId,
+                    state.getLastLogIndex(),
+                    state.getLastLogTerm(),
+                    state.getLog(),
+                    state.getCommitIndex(),
+                    false
+            );
+            raftClient.sendRequest(peers.get(followerId-1),port.get(followerId-1), heartbeat);
         }
     }
+
+    public void sync(RaftRequest request) {
+        state.setLog(request.getEntries());
+        System.out.println("node "+nodeId+" sync :"+state.getLog());
+    }
+
+//    public void appendEntries(List<LogEntry> entries) {
+//        // 实现日志条目追加逻辑
+//        if (entries.isEmpty()) {
+//            // 处理心跳
+//            System.out.println("Received heartbeat from leader");
+//            resetElectionTimer();
+//        } else {
+//            // 处理追加日志条目
+//            // 这里需要实现日志追加的逻辑
+//            System.out.println("Received log entries to append");
+//        }
+//    }
 }

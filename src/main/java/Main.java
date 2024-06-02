@@ -1,4 +1,9 @@
+package main.java;
+
 import main.java.core.RaftNode;
+import main.java.entity.LogEntry;
+import main.java.network.RaftRequest;
+import main.java.network.RaftRequestType;
 import main.java.network.RaftServer;
 import main.java.util.Config;
 
@@ -30,7 +35,26 @@ public class Main {
 
             // 创建每个节点
             RaftNode raftNode = new RaftNode(i + 1, peerSubset, portSubset);
-
+            if (i == 0){
+                LogEntry l1 = new LogEntry(1,0,"add 1");
+                LogEntry l2 = new LogEntry(1,0,"update 2");
+                LogEntry l3 = new LogEntry(1,0,"delete 2");
+                List<LogEntry> param = new ArrayList<>();
+                param.add(l1);
+                param.add(l2);
+                param.add(l3);
+                RaftRequest t = new RaftRequest(
+                        RaftRequestType.SYNC,
+                        0,
+                        0,
+                        0,
+                        0,
+                        param,
+                        0,
+                        false
+                );
+                raftNode.sync(t);
+            }
             // 创建并启动服务器线程
             RaftServer server = new RaftServer(ports.get(i), raftNode);
             Thread serverThread = new Thread(server, "ServerThread-" + (i + 1));

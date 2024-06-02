@@ -43,8 +43,8 @@ public class RaftServer implements Runnable {
                     case ANSWER_VOTE:
                         raftNode.receiveVoteResponse(request);
                         break;
-                    case APPEND_ENTRIES:
-                        raftNode.appendEntries(request.getEntries());
+                    case SYNC:
+                        raftNode.sync(request);
                         break;
                     case SEND_HEARTBEAT:
                         raftNode.receiveHeartbeats(request);

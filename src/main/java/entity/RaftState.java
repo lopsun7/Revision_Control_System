@@ -15,6 +15,15 @@ public class RaftState {
         this.commitIndex = 0;  // 初始化为0
     }
 
+    public void addAll(List<LogEntry> append){
+        if(append == null) return;
+        log.addAll(append);
+    }
+    public int getTermFromIndex(int index){
+        return log.get(index).getTerm();
+    }
+
+
     public int getLastLogIndex() {
         if (log.isEmpty()) {
             return 0;  // 返回0或其他适当的默认值

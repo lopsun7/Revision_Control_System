@@ -1,6 +1,8 @@
 package main.java.entity;
 
-public class LogEntry {
+import java.io.Serializable;
+
+public class LogEntry implements Serializable {
     private int index;
     private int term;
     private String command;
@@ -12,6 +14,16 @@ public class LogEntry {
     }
 
     // getters and setters
+
+
+    @Override
+    public String toString() {
+        return "LogEntry{" +
+                "index=" + index +
+                ", term=" + term +
+                ", command='" + command + '\'' +
+                '}';
+    }
 
     public int getIndex() {
         return index;
