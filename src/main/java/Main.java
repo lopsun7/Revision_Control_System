@@ -1,11 +1,9 @@
-package main.java;
-
-import main.java.core.RaftNode;
-import main.java.entity.LogEntry;
-import main.java.network.RaftRequest;
-import main.java.network.RaftRequestType;
-import main.java.network.RaftServer;
-import main.java.util.Config;
+import core.RaftNode;
+import entity.LogEntry;
+import network.RaftRequest;
+import network.RaftRequestType;
+import network.RaftServer;
+import util.Config;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,9 +34,9 @@ public class Main {
             // 创建每个节点
             RaftNode raftNode = new RaftNode(i + 1, peerSubset, portSubset);
             if (i == 0){
-                LogEntry l1 = new LogEntry(1,0,"add 1");
-                LogEntry l2 = new LogEntry(1,0,"update 2");
-                LogEntry l3 = new LogEntry(1,0,"delete 2");
+                LogEntry l1 = new LogEntry(1,0,"push","test.txt","hello,world lol","2021-09-01T06:00:00Z");
+                LogEntry l2 = new LogEntry(1,0,"update 2","test.txt","","2021-09-02T07:00:00Z");
+                LogEntry l3 = new LogEntry(1,0,"pull","test.txt","","2021-09-03T11:00:00Z");
                 List<LogEntry> param = new ArrayList<>();
                 param.add(l1);
                 param.add(l2);

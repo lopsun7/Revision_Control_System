@@ -1,4 +1,4 @@
-package main.java.network;
+package network;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -21,7 +21,7 @@ public class RaftClient {
                  ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream())) {
                 objectOutputStream.writeObject(request);
             } catch (IOException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         });
     }

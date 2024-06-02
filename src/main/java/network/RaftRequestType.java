@@ -1,4 +1,4 @@
-package main.java.network;
+package network;
 
 public enum RaftRequestType {
     REQUEST_VOTE,    // 请求投票

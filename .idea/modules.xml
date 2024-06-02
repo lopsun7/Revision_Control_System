@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Revision-Control-System.iml" filepath="$PROJECT_DIR$/Revision-Control-System.iml" />
-      <module fileurl="file://$PROJECT_DIR$/myapplication.iml" filepath="$PROJECT_DIR$/myapplication.iml" />
     </modules>
   </component>
 </project>

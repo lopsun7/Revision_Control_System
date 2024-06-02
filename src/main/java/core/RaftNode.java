@@ -1,14 +1,16 @@
-package main.java.core;
+package core;
 
-import main.java.entity.LogEntry;
-import main.java.entity.RaftState;
-import main.java.network.RaftClient;
-import main.java.network.RaftRequest;
-import main.java.network.RaftRequestType;
+import entity.LogEntry;
+import entity.RaftState;
+import network.RaftClient;
+import network.RaftRequest;
+import network.RaftRequestType;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Component
 public class RaftNode {
     private RaftState state;
     private ServerState role; // LEADER, FOLLOWER, CANDIDATE
@@ -247,16 +249,16 @@ public class RaftNode {
         System.out.println("node "+nodeId+" sync :"+state.getLog());
     }
 
-//    public void appendEntries(List<LogEntry> entries) {
-//        // 实现日志条目追加逻辑
-//        if (entries.isEmpty()) {
-//            // 处理心跳
-//            System.out.println("Received heartbeat from leader");
-//            resetElectionTimer();
-//        } else {
-//            // 处理追加日志条目
-//            // 这里需要实现日志追加的逻辑
-//            System.out.println("Received log entries to append");
-//        }
-//    }
+    public boolean isLeader() {
+        return role == ServerState.LEADER;
+    }
+
+    public void handlePush(String filename, String content) {
+    }
+
+    public String handlePull(String filename) {
+        return "";
+    }
+
+
 }
