@@ -4,27 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a9db3bc-7ff4-4448-b2c6-d23736dc141d" name="Changes" comment="`0.36 - Java 8`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database">
-      <change afterPath="$PROJECT_DIR$/src/main/java/spring/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/spring/FileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/spring/RaftConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="5a9db3bc-7ff4-4448-b2c6-d23736dc141d" name="Changes" comment="`0.38 - appendEntries`&#10;&#10;futrue plan:&#10;&#10;0.4 - commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database">
+      <change afterPath="$PROJECT_DIR$/src/main/java/core/FileSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/File.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapplication.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/core/RaftNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/RaftNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/ServerState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/ServerState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/LogEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/LogEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/RaftState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/RaftState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/network/RaftClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/network/RaftRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/network/RaftRequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftRequestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/network/RaftServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spring/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spring/FileController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +62,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.spring boot.executor": "Run",
     "Application.test.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
@@ -146,6 +136,7 @@
       <workItem from="1717104895111" duration="3894000" />
       <workItem from="1717283268825" duration="8829000" />
       <workItem from="1717306812721" duration="10239000" />
+      <workItem from="1717364043947" duration="7022000" />
     </task>
     <task id="LOCAL-00001" summary="initialization 0.1">
       <option name="closed" value="true" />
@@ -184,6 +175,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initialization 0.1" />

@@ -7,7 +7,10 @@ import network.RaftRequest;
 import network.RaftRequestType;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
@@ -19,10 +22,12 @@ public class RaftNode {
     private Random random;
     private int nodeId; // 节点的唯一标识
     private AtomicInteger voteCount; // 用于计票的原子整数
-    private AtomicInteger successCount; // 用于日志复制的原子整数
+    private Map<Integer, AtomicInteger> appendEntriesAckCounter = new ConcurrentHashMap<>();
+    private Map<Integer, Timer> timers = new ConcurrentHashMap<>();
     private List<String> peers; // 其他节点的地址列表
     private List<Integer> port; // 其他节点的地址列表
     private RaftClient raftClient; // 网络通信客户端
+    private FileSystem fileSystem; //状态机
     public RaftNode(int nodeId,List<String> peers,List<Integer> port) {
         this.state = new RaftState();
         this.role = ServerState.FOLLOWER;
@@ -30,10 +35,10 @@ public class RaftNode {
         this.random = new Random();
         this.nodeId = nodeId;
         this.voteCount = new AtomicInteger(0);
-        this.successCount = new AtomicInteger(0);
         this.raftClient = new RaftClient();
         this.peers = peers;
         this.port = port;
+        this.fileSystem = new FileSystem();
         resetElectionTimer();
     }
 
@@ -47,7 +52,7 @@ public class RaftNode {
             public void run() {
                 startElection();
             }
-        }, 2500 + random.nextInt(2500)); // 1500 to 3000 milliseconds
+        }, 5000 + random.nextInt(2500)); // 1500 to 3000 milliseconds
     }
 
     public synchronized void startElection() {
@@ -67,6 +72,7 @@ public class RaftNode {
                     state.getLastLogTerm(),
                     state.getLog(),
                     state.getCommitIndex(),
+                    -1,
                     false
             );
             raftClient.sendRequest(peers.get(i),port.get(i), voteRequest);
@@ -96,16 +102,6 @@ public class RaftNode {
                 voteGranted = true;
                 resetElectionTimer();
             }
-//            if (request.getTerm() > currentTerm || state.getVotedFor() == -1) {
-//                state.setCurrentTerm(request.getTerm()); // 更新当前任期
-//                state.setVotedFor(-1);  // 重置已投票的候选人ID
-//
-//                if (request.getLastLogTerm() > lastLogTerm ||
-//                        (request.getLastLogTerm() == lastLogTerm && request.getLastLogIndex() >= lastLogIndex)) {
-//                    state.setVotedFor(request.getCandidateId()); // 投票给候选人
-//                    voteGranted = true; // 发送赞成票
-//                }
-//            }
         }
 
         // 使用 RaftClient 发送投票结果
@@ -117,6 +113,7 @@ public class RaftNode {
                 state.getLastLogTerm(),
                 state.getLog(),
                 state.getCommitIndex(),
+                -1,
                 voteGranted
         );
         int id = request.getCandidateId();
@@ -144,17 +141,16 @@ public class RaftNode {
                 heartbeatTimer.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
-                        sendHeartbeats();
+                        sendHeartbeats(null,0);
                     }
-                }, 0, 500);  // 每500毫秒发送一次心跳
+                }, 0, 5000);  // 每500毫秒发送一次心跳
                 // 还可以在此处初始化其他与领导者相关的任务
             }
         }
     }
 
     //发送心跳
-    public void sendHeartbeats() {
-        successCount.set(0);
+    public void sendHeartbeats(List<LogEntry> append, int lockId) {
         if (role == ServerState.LEADER) {
             for (int i = 0;i < peers.size(); i++) {
                 RaftRequest heartbeat = new RaftRequest(
@@ -163,8 +159,9 @@ public class RaftNode {
                         nodeId,
                         state.getLastLogIndex(),
                         state.getLastLogTerm(),
-                        null,
+                        append,
                         state.getCommitIndex(),
+                        lockId,
                         false
                 );
                 raftClient.sendRequest(peers.get(i),port.get(i), heartbeat);
@@ -182,6 +179,7 @@ public class RaftNode {
         state.setCurrentTerm(request.getTerm());
         role = ServerState.FOLLOWER;
         resetElectionTimer();
+        //日志为空，纯心跳，返回
         if(request.getEntries() == null) return;
 
         //判断日志复制是否成功
@@ -195,7 +193,16 @@ public class RaftNode {
             state.addAll(request.getEntries());
             //提交进度比leader慢
             if (state.getCommitIndex() < request.getLeaderCommit()){
-                //apply to state machine
+                //commit
+                int i = state.getCommitIndex() - 1;
+                int j = request.getLeaderCommit() - 1;
+                List<LogEntry> list = state.getLog();
+                while(i >= 0 && i < j){
+                    LogEntry log = list.get(i);
+                    fileSystem.push(log.getFilename(),log.getContent());
+                    i++;
+                }
+                state.setCommitIndex(request.getLeaderCommit());
             }
         }
         else{
@@ -211,6 +218,7 @@ public class RaftNode {
                 state.getLastLogTerm(),
                 null,
                 state.getCommitIndex(),
+                -1,
                 isSuccess
         );
         raftClient.sendRequest(peers.get(leaderId-1),port.get(leaderId-1),heartbeatResponse);
@@ -222,10 +230,19 @@ public class RaftNode {
         boolean isSuccess = request.getVote();
         System.out.println("leader "+nodeId+" term "+state.getCurrentTerm()+" receives success from follower node "+request.getCandidateId());
         if (isSuccess) {
-            int sc = successCount.incrementAndGet();
-            if (sc >= (peers.size() / 2) + 1) {
-                successCount.set(0);
-                //apply to state machine
+            int successCount = appendEntriesAckCounter.get(request.getLockId()).incrementAndGet();
+            if (successCount >= (peers.size() / 2) + 1) {
+                appendEntriesAckCounter.get(request.getLockId()).set(0);
+                //commit
+                int i = state.getCommitIndex() - 1;
+                int j = state.getLastLogIndex() - 1;
+                List<LogEntry> list = state.getLog();
+                while(i >= 0 && i < j){
+                    LogEntry log = list.get(i);
+                    fileSystem.push(log.getFilename(),log.getContent());
+                    i++;
+                }
+                state.setCommitIndex(request.getLastLogIndex()+1);
             }
         }
         else {
@@ -238,6 +255,7 @@ public class RaftNode {
                     state.getLastLogTerm(),
                     state.getLog(),
                     state.getCommitIndex(),
+                    -1,
                     false
             );
             raftClient.sendRequest(peers.get(followerId-1),port.get(followerId-1), heartbeat);
@@ -254,10 +272,28 @@ public class RaftNode {
     }
 
     public void handlePush(String filename, String content) {
+        //获取时间戳
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = now.format(formatter);
+
+        //封装日志
+        LogEntry newLog = new LogEntry(state.getLastLogIndex()+1,state.getCurrentTerm(),"push",filename,content,formattedDateTime);
+        List<LogEntry> append = new ArrayList<>();
+        append.add(newLog);
+
+        //为每个appendEntries创建新计数器
+        AtomicInteger counter = new AtomicInteger(0);
+        appendEntriesAckCounter.put(state.getLastLogIndex()+1, counter);
+        //本地日志更新
+        state.addAll(append);
+        //向其他followers发送appendEntries
+        sendHeartbeats(append,state.getLastLogIndex());
+
     }
 
     public String handlePull(String filename) {
-        return "";
+        return fileSystem.pull(filename).getContent();
     }
 
 

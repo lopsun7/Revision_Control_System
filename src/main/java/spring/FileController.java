@@ -25,6 +25,9 @@ public class FileController {
     @GetMapping("/{filename}")
     public ResponseEntity<String> pullFile(@PathVariable("filename") String filename) {
         System.out.println("pull" + filename);
+        if (!raftNode.isLeader()) {
+            return ResponseEntity.badRequest().body("Not a leader. Redirect or retry.");
+        }
         String content = raftNode.handlePull(filename);
         return ResponseEntity.ok(content);
     }

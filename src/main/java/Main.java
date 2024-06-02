@@ -49,6 +49,7 @@ public class Main {
                         0,
                         param,
                         0,
+                        0,
                         false
                 );
                 raftNode.sync(t);

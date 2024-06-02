@@ -14,9 +14,11 @@ public class RaftRequest implements Serializable {
     private List<LogEntry> entries; // 日志条目
     private int leaderCommit; // 领导者已提交的日志索引
 
+    private int lockId;
+
     private boolean vote; //投票结果
 
-    public RaftRequest(RaftRequestType requestType, int term, int candidateId, int lastLogIndex, int lastLogTerm, List<LogEntry> entries, int leaderCommit, boolean vote) {
+    public RaftRequest(RaftRequestType requestType, int term, int candidateId, int lastLogIndex, int lastLogTerm, List<LogEntry> entries, int leaderCommit, int lockId, boolean vote) {
         this.requestType = requestType;
         this.term = term;
         this.candidateId = candidateId;
@@ -24,11 +26,20 @@ public class RaftRequest implements Serializable {
         this.lastLogTerm = lastLogTerm;
         this.entries = entries;
         this.leaderCommit = leaderCommit;
-        this.vote =vote;
+        this.lockId = lockId;
+        this.vote = vote;
     }
 
-    // Getters and Setters
+// Getters and Setters
 
+
+    public int getLockId() {
+        return lockId;
+    }
+
+    public void setLockId(int lockId) {
+        this.lockId = lockId;
+    }
 
     public boolean getVote() {
         return vote;
