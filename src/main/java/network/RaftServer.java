@@ -1,6 +1,8 @@
 package network;
 
 import core.RaftNode;
+import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -13,6 +15,12 @@ public class RaftServer implements Runnable {
     private RaftNode raftNode;
     private ExecutorService executorService;
 
+    @PostConstruct
+    public void init() {
+        new Thread(this).start();
+        System.out.println("RaftServer is running on port: " + serverSocket.getLocalPort());
+        System.out.println(raftNode.isLeader());
+    }
     public RaftServer(int port, RaftNode node) throws IOException {
         this.serverSocket = new ServerSocket(port);
         this.raftNode = node;

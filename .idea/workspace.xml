@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a9db3bc-7ff4-4448-b2c6-d23736dc141d" name="Changes" comment="`0.38 - appendEntries`&#10;&#10;futrue plan:&#10;&#10;0.4 - commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database">
-      <change afterPath="$PROJECT_DIR$/src/main/java/core/FileSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/File.java" afterDir="false" />
+    <list default="true" id="5a9db3bc-7ff4-4448-b2c6-d23736dc141d" name="Changes" comment="0.55&#10;- 1.state machine &amp; commit implementation&#10;- 2.raftnode handle pull &amp; push function&#10;futrue plan:&#10;0.60 - spring boot application dependency injection&#10;0.65 - test: handle push requset → appendEntries → commit → return to front&#10;0.70 - test: handle pull request → return to front&#10;0.75 - deployment&#10;optional:&#10;0.8 - socket → netty&#10;0.9 - ez txt → database&#10;1.0 - binary-file support">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapplication.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/core/RaftNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/RaftNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/network/RaftRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/network/RaftServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/spring/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spring/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spring/RaftConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spring/RaftConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +59,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.spring boot 1.executor": "Run",
+    "Application.spring boot 2.executor": "Run",
+    "Application.spring boot 3.executor": "Run",
     "Application.spring boot.executor": "Run",
     "Application.test.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
@@ -97,8 +97,22 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.spring boot">
-    <configuration name="spring boot" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Application.spring boot 3">
+    <configuration name="spring boot 1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="spring.Application" />
+      <module name="myapplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="spring boot 2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="spring.Application" />
+      <module name="myapplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="spring boot 3" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="spring.Application" />
       <module name="myapplication" />
       <method v="2">
@@ -114,7 +128,9 @@
     </configuration>
     <list>
       <item itemvalue="Application.test" />
-      <item itemvalue="Application.spring boot" />
+      <item itemvalue="Application.spring boot 1" />
+      <item itemvalue="Application.spring boot 2" />
+      <item itemvalue="Application.spring boot 3" />
     </list>
   </component>
   <component name="SharedIndexes">
@@ -136,7 +152,7 @@
       <workItem from="1717104895111" duration="3894000" />
       <workItem from="1717283268825" duration="8829000" />
       <workItem from="1717306812721" duration="10239000" />
-      <workItem from="1717364043947" duration="7022000" />
+      <workItem from="1717364043947" duration="10886000" />
     </task>
     <task id="LOCAL-00001" summary="initialization 0.1">
       <option name="closed" value="true" />
@@ -170,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717026311082</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="0.55&#10;- 1.state machine &amp; commit implementation&#10;- 2.raftnode handle pull &amp; push function&#10;futrue plan:&#10;0.60 - spring boot application dependency injection&#10;0.65 - test: handle push requset → appendEntries → commit → return to front&#10;0.70 - test: handle pull request → return to front&#10;0.75 - deployment&#10;optional:&#10;0.8 - socket → netty&#10;0.9 - ez txt → database&#10;1.0 - binary-file support">
+      <option name="closed" value="true" />
+      <created>1717371410820</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1717371410821</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +216,7 @@
     <MESSAGE value="`0.2 - 1.leader election added(to be verified) 2.heartbeat mechanism(to be verified)`&#10;&#10;futrue plan:&#10;&#10;0.3 - 1.rpc communication within nodes 2.leader election &amp; heartbeat mechanism verification&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - Data persistence&#10;&#10;0.7 - deployment" />
     <MESSAGE value="`0.3 - 1.socket communication within nodes 2.raft server &amp; raft client 3. heartbeat verified`&#10;&#10;futrue plan:&#10;&#10;0.35 - multiple candidates issues&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
     <MESSAGE value="`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
-    <option name="LAST_COMMIT_MESSAGE" value="`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
+    <MESSAGE value="0.55&#10;- 1.state machine &amp; commit implementation&#10;- 2.raftnode handle pull &amp; push function&#10;futrue plan:&#10;0.60 - spring boot application dependency injection&#10;0.65 - test: handle push requset → appendEntries → commit → return to front&#10;0.70 - test: handle pull request → return to front&#10;0.75 - deployment&#10;optional:&#10;0.8 - socket → netty&#10;0.9 - ez txt → database&#10;1.0 - binary-file support" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.55&#10;- 1.state machine &amp; commit implementation&#10;- 2.raftnode handle pull &amp; push function&#10;futrue plan:&#10;0.60 - spring boot application dependency injection&#10;0.65 - test: handle push requset → appendEntries → commit → return to front&#10;0.70 - test: handle pull request → return to front&#10;0.75 - deployment&#10;optional:&#10;0.8 - socket → netty&#10;0.9 - ez txt → database&#10;1.0 - binary-file support" />
   </component>
 </project>

@@ -1,6 +1,7 @@
 package spring;
 
 import core.RaftNode;
+import network.RaftServer;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ public class FileController {
 
     @Autowired
     private RaftNode raftNode; // RaftNode应该能够检查当前节点的角色，并进行日志操作
+    @Autowired
+    private RaftServer raftServer;
 
     @PostMapping("/{filename}")
     public ResponseEntity<String> pushFile(@PathVariable("filename") String filename, @RequestBody String content) {
