@@ -310,5 +310,9 @@ public class RaftNode {
         return Objects.equals(timestamp, "") ? "" : file.getContent();
     }
 
+    public List<File> handleAll() {
+        return fileSystem.getfiles();
+    }
+
 
 }

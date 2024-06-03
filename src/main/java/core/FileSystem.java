@@ -5,6 +5,8 @@ import entity.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class FileSystem {
@@ -36,5 +38,13 @@ public class FileSystem {
         return "FileSystem{" +
                 "files=" + files +
                 '}';
+    }
+
+    public List<File> getfiles(){
+        List<File> list = new LinkedList<>();
+        for (Map.Entry<String, File> entry : files.entrySet()) {
+            list.add(entry.getValue());
+        }
+        return list;
     }
 }

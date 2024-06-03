@@ -1,11 +1,15 @@
 package spring;
 
 import core.RaftNode;
+import entity.File;
 import network.RaftServer;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -36,5 +40,20 @@ public class FileController {
         String content = raftNode.handlePull(filename);
         if(Objects.equals(content, "")) return ResponseEntity.badRequest().body("File does not exist");
         return ResponseEntity.ok(content);
+    }
+
+    @GetMapping("/all")
+    public Map<String, File> getAll() {
+        if (!raftNode.isLeader()) {
+            Map<String, File> map2 = new HashMap<>();
+            map2.put("Error", new File("","",""));
+            return map2;
+        }
+        List<File> files = raftNode.handleAll();
+        Map<String, File> map1 = new HashMap<>();
+        for (File file: files){
+            map1.put(file.getFilename(),file);
+        }
+        return map1;
     }
 }
