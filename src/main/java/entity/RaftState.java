@@ -7,12 +7,12 @@ public class RaftState {
     private int currentTerm;
     private int votedFor;
     private List<LogEntry> log;
-    private int commitIndex;  // 已提交的最高日志条目的索引
+    private int commitIndex;  // 下一条该提交的日志索引
 
     public RaftState() {
         this.log = new ArrayList<>();
         this.votedFor = -1;
-        this.commitIndex = 0;  // 初始化为0
+        this.commitIndex = 1;  // 初始化为0
     }
 
     public void addAll(List<LogEntry> append){

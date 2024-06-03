@@ -28,7 +28,7 @@ public class FileSystem {
     }
 
     public File pull(String filename){
-        return files.get(filename);
+        return files.getOrDefault(filename, new File("","",""));
     }
 
     @Override

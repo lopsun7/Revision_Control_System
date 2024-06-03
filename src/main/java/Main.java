@@ -14,7 +14,7 @@ import java.util.List;
 
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Config config = new Config("src/main/resources/config.properties");
         List<String> peers = config.getPeers();
         List<Integer> ports = config.getPorts();
@@ -22,38 +22,12 @@ public class Main {
         // 用于存储所有服务器线程的列表
         List<Thread> serverThreads = new ArrayList<>();
 
+        List<RaftNode> list = new ArrayList<>();
         for (int i = 0; i < peers.size(); i++) {
-            // 创建节点的副本列表
-            List<String> peerSubset = new ArrayList<>(peers);
-            List<Integer> portSubset = new ArrayList<>(ports);
-
-            // 移除当前节点的信息，以便其他节点不尝试与自己连接
-            peerSubset.remove(i);
-            portSubset.remove(i);
 
             // 创建每个节点
-            RaftNode raftNode = new RaftNode(i + 1, peerSubset, portSubset);
-            if (i == 0){
-                LogEntry l1 = new LogEntry(1,0,"push","test.txt","hello,world lol","2021-09-01T06:00:00Z");
-                LogEntry l2 = new LogEntry(1,0,"update 2","test.txt","","2021-09-02T07:00:00Z");
-                LogEntry l3 = new LogEntry(1,0,"pull","test.txt","","2021-09-03T11:00:00Z");
-                List<LogEntry> param = new ArrayList<>();
-                param.add(l1);
-                param.add(l2);
-                param.add(l3);
-                RaftRequest t = new RaftRequest(
-                        RaftRequestType.SYNC,
-                        0,
-                        0,
-                        0,
-                        0,
-                        param,
-                        0,
-                        0,
-                        false
-                );
-                raftNode.sync(t);
-            }
+            RaftNode raftNode = new RaftNode(i + 1, peers, ports);
+            list.add(raftNode);
             // 创建并启动服务器线程
             RaftServer server = new RaftServer(ports.get(i), raftNode);
             Thread serverThread = new Thread(server, "ServerThread-" + (i + 1));
@@ -63,6 +37,8 @@ public class Main {
             serverThreads.add(serverThread);
         }
 
+        Thread.sleep(10000);
+        list.get(0).handlePush("res.txt","test content");
         // 等待所有线程完成
         for (Thread thread : serverThreads) {
             try {

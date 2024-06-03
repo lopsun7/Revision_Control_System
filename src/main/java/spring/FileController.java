@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/files")
 public class FileController {
@@ -32,6 +34,7 @@ public class FileController {
             return ResponseEntity.badRequest().body("Not a leader. Redirect or retry.");
         }
         String content = raftNode.handlePull(filename);
+        if(Objects.equals(content, "")) return ResponseEntity.badRequest().body("File does not exist");
         return ResponseEntity.ok(content);
     }
 }

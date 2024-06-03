@@ -21,14 +21,14 @@ public class RaftConfig  {
         List<String> peers = config.getPeers();
         List<Integer> ports = config.getPorts();
         int nodeId = config.getNodeId();
-        // 创建节点的副本列表
-        List<String> peerSubset = new ArrayList<>(peers);
-        List<Integer> portSubset = new ArrayList<>(ports);
+//        // 创建节点的副本列表
+//        List<String> peerSubset = new ArrayList<>(peers);
+//        List<Integer> portSubset = new ArrayList<>(ports);
 
-        // 移除当前节点的信息，以便其他节点不尝试与自己连接
-        peerSubset.remove(nodeId-1);
-        portSubset.remove(nodeId-1);
-        return new RaftNode(nodeId,peerSubset,portSubset);
+//        // 移除当前节点的信息，以便其他节点不尝试与自己连接
+//        peerSubset.remove(nodeId-1);
+//        portSubset.remove(nodeId-1);
+        return new RaftNode(nodeId,peers,ports);
         // 还可以传递其他构造函数参数
     }
     @Bean
