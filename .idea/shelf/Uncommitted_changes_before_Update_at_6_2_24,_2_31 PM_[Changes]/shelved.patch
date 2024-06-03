@@ -1,0 +1,131 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"5a9db3bc-7ff4-4448-b2c6-d23736dc141d\" name=\"Changes\" comment=\"`0.36 - Java 8`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/compiler.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/jarRepositories.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/myapplication.iml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/modules.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/modules.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Main.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/core/RaftNode.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/core/RaftNode.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/entity/LogEntry.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/entity/LogEntry.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/entity/RaftState.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/entity/RaftState.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/network/RaftRequestType.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/network/RaftRequestType.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/network/RaftServer.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/network/RaftServer.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;lopsun7&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">\n    <option name=\"selectedUrlAndAccountId\">\n      <UrlAndAccount>\n        <option name=\"accountId\" value=\"12d6f176-8c11-4d0a-9e6c-35d1793dc7b0\" />\n        <option name=\"url\" value=\"https://github.com/lopsun7/Revision_Control_System.git\" />\n      </UrlAndAccount>\n    </option>\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 8\n}</component>\n  <component name=\"ProjectId\" id=\"2h4ZvZH7F1Rnf2i3LCnB98AgBmb\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\n    &quot;Application.test.executor&quot;: &quot;Run&quot;,\n    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\n    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/lopsun/Documents/317/project/Revision-Control-System/src/Main.java&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src/main/resources\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"test\" type=\"Application\" factoryName=\"Application\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"main.java.Main\" />\n      <module name=\"myapplication\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"5a9db3bc-7ff4-4448-b2c6-d23736dc141d\" name=\"Changes\" comment=\"\" />\n      <created>1716855541022</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1716855541022</updated>\n      <workItem from=\"1716855542060\" duration=\"29460000\" />\n      <workItem from=\"1717104895111\" duration=\"3894000\" />\n      <workItem from=\"1717283268825\" duration=\"8829000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"initialization 0.1\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1716855675117</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1716855675117</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"`0.2 - 1.leader election added(to be verified) 2.heartbeat mechanism(to be verified)`&#10;&#10;futrue plan:&#10;&#10;0.3 - 1.rpc communication within nodes 2.leader election &amp; heartbeat mechanism verification&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - Data persistence&#10;&#10;0.7 - deployment\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1716863586375</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1716863586375</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"`0.3 - 1.socket communication within nodes 2.raft server &amp; raft client 3. heartbeat verified`&#10;&#10;futrue plan:&#10;&#10;0.35 - multiple candidates issues&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1717020885331</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1717020885331</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1717026311082</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1717026311082</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"5\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"initialization 0.1\" />\n    <MESSAGE value=\"`0.2 - 1.leader election added(to be verified) 2.heartbeat mechanism(to be verified)`&#10;&#10;futrue plan:&#10;&#10;0.3 - 1.rpc communication within nodes 2.leader election &amp; heartbeat mechanism verification&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - Data persistence&#10;&#10;0.7 - deployment\" />\n    <MESSAGE value=\"`0.3 - 1.socket communication within nodes 2.raft server &amp; raft client 3. heartbeat verified`&#10;&#10;futrue plan:&#10;&#10;0.35 - multiple candidates issues&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database\" />\n    <MESSAGE value=\"`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,18 +4,13 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="5a9db3bc-7ff4-4448-b2c6-d23736dc141d" name="Changes" comment="`0.36 - Java 8`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database">
+-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/myapplication.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
++    <list default="true" id="5a9db3bc-7ff4-4448-b2c6-d23736dc141d" name="Changes" comment="`0.38 - appendEntries`&#10;&#10;futrue plan:&#10;&#10;0.4 - commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database">
++      <change afterPath="$PROJECT_DIR$/src/main/java/server1.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/java/server2.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/java/server3.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/core/RaftNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/RaftNode.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/LogEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/LogEntry.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/RaftState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/RaftState.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/network/RaftRequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftRequestType.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/network/RaftServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/network/RaftServer.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -58,33 +53,39 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.test.executor&quot;: &quot;Run&quot;,
+-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/lopsun/Documents/317/project/Revision-Control-System/src/Main.java&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.Main.executor": "Run",
++    "Application.server1.executor": "Run",
++    "Application.server2.executor": "Run",
++    "Application.server3.executor": "Run",
++    "Application.test.executor": "Run",
++    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "main",
++    "jdk.selected.JAVA_MODULE": "openjdk-21",
++    "kotlin-language-version-configured": "true",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "onboarding.tips.debug.path": "/Users/lopsun/Documents/317/project/Revision-Control-System/src/Main.java",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.2",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="$PROJECT_DIR$/src/main/resources" />
+     </key>
++    <key name="CopyClassDialog.RECENTS_KEY">
++      <recent name="main.java" />
++    </key>
+   </component>
+   <component name="RunManager">
+     <configuration name="test" type="Application" factoryName="Application">
+@@ -112,7 +113,7 @@
+       <updated>1716855541022</updated>
+       <workItem from="1716855542060" duration="29460000" />
+       <workItem from="1717104895111" duration="3894000" />
+-      <workItem from="1717283268825" duration="8829000" />
++      <workItem from="1717283268825" duration="10127000" />
+     </task>
+     <task id="LOCAL-00001" summary="initialization 0.1">
+       <option name="closed" value="true" />
+@@ -146,7 +147,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1717026311082</updated>
+     </task>
+-    <option name="localTasksCounter" value="5" />
++    <task id="LOCAL-00005" summary="`0.38 - appendEntries`&#10;&#10;futrue plan:&#10;&#10;0.4 - commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database">
++      <option name="closed" value="true" />
++      <created>1717292478556</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1717292478556</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -157,6 +166,7 @@
+     <MESSAGE value="`0.2 - 1.leader election added(to be verified) 2.heartbeat mechanism(to be verified)`&#10;&#10;futrue plan:&#10;&#10;0.3 - 1.rpc communication within nodes 2.leader election &amp; heartbeat mechanism verification&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - Data persistence&#10;&#10;0.7 - deployment" />
+     <MESSAGE value="`0.3 - 1.socket communication within nodes 2.raft server &amp; raft client 3. heartbeat verified`&#10;&#10;futrue plan:&#10;&#10;0.35 - multiple candidates issues&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
+     <MESSAGE value="`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
+-    <option name="LAST_COMMIT_MESSAGE" value="`0.35 - multiple candidates issues`&#10;&#10;futrue plan:&#10;&#10;0.4 - 1.appendEntries 2.commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
++    <MESSAGE value="`0.38 - appendEntries`&#10;&#10;futrue plan:&#10;&#10;0.4 - commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
++    <option name="LAST_COMMIT_MESSAGE" value="`0.38 - appendEntries`&#10;&#10;futrue plan:&#10;&#10;0.4 - commit in state machine&#10;&#10;0.5 - front-end and back-end interfacing（all through leader node）&#10;&#10;0.6 - easy data persistence&#10;&#10;0.7 - deployment&#10;&#10;optional:&#10;&#10;0.8 - socket → netty&#10;&#10;0.9 - ez txt → database" />
+   </component>
+ </project>
+\ No newline at end of file
