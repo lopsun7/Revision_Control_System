@@ -20,7 +20,7 @@ public class FileController {
     private RaftNode raftNode; // RaftNode应该能够检查当前节点的角色，并进行日志操作
     @Autowired
     private RaftServer raftServer;
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{filename}")
     public ResponseEntity<String> pushFile(@PathVariable("filename") String filename, @RequestBody String content) {
         System.out.println("push" + filename);
@@ -30,7 +30,7 @@ public class FileController {
         raftNode.handlePush(filename, content);
         return ResponseEntity.ok("File pushed successfully.");
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{filename}")
     public ResponseEntity<String> pullFile(@PathVariable("filename") String filename) {
         System.out.println("pull" + filename);
@@ -41,7 +41,7 @@ public class FileController {
         if(Objects.equals(content, "")) return ResponseEntity.badRequest().body("File does not exist");
         return ResponseEntity.ok(content);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all")
     public Map<String, File> getAll() {
         if (!raftNode.isLeader()) {
