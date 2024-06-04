@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  node2:
+    image: rev-control:0.0
+    ports:
+      - "8001:8001"
+      - "8082:8082"
+    environment:
+      PORT: 8082
+      ID: 2
+      IP: node2
+    depends_on:
+      - node1
+    networks:
+      - my_network
+
+  node1:
+    image: rev-control:0.0
+    ports:
+      - "8000:8000"
+      - "8081:8081"
+    environment:
+      PORT: 8081
+      ID: 1
+      IP: node1
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: overlay

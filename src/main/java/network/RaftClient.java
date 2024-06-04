@@ -21,7 +21,8 @@ public class RaftClient {
                  ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream())) {
                 objectOutputStream.writeObject(request);
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                System.out.println("Connection Refused");
             }
         });
     }

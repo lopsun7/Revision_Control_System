@@ -10,6 +10,7 @@ import util.Config;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 @Configuration
 public class RaftConfig  {
@@ -17,10 +18,10 @@ public class RaftConfig  {
 
     @Bean
     public RaftNode raftNode() throws IOException {
-        Config config = new Config("src/main/resources/config.properties");
-        List<String> peers = config.getPeers();
-        List<Integer> ports = config.getPorts();
-        int nodeId = config.getNodeId();
+        //Config config = new Config("src/main/resources/config.properties");
+        List<String> peers = Arrays.asList("node1", "node2", "node3");//config.getPeers();
+        List<Integer> ports = Arrays.asList(8000,8001,8002);//config.getPorts();
+        int nodeId = Integer.valueOf(System.getenv("ID"));//config.getNodeId();
 //        // 创建节点的副本列表
 //        List<String> peerSubset = new ArrayList<>(peers);
 //        List<Integer> portSubset = new ArrayList<>(ports);
@@ -33,8 +34,10 @@ public class RaftConfig  {
     }
     @Bean
     public RaftServer raftServer(RaftNode raftNode) throws IOException {
-        Config config = new Config("src/main/resources/config.properties");
-        int port = config.getPorts().get(config.getNodeId() - 1);  // 假设节点ID和端口列表是一一对应的
+        //Config config = new Config("src/main/resources/config.properties");
+        int nodeId = Integer.valueOf(System.getenv("ID"));
+        List<Integer> ports = Arrays.asList(8000,8001,8002,8003,8004);
+        int port = ports.get(nodeId - 1);  // 假设节点ID和端口列表是一一对应的
         return new RaftServer(port, raftNode);
     }
 
